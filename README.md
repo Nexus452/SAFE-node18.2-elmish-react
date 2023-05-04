@@ -1,53 +1,29 @@
-# SAFE Template
+# SAFE-node18.2-elmish-react
 
-This template can be used to generate a full-stack web application using the [SAFE Stack](https://safe-stack.github.io/). It was created using the dotnet [SAFE Template](https://safe-stack.github.io/docs/template-overview/). If you want to learn more about the template why not start with the [quick start](https://safe-stack.github.io/docs/quickstart/) guide?
+Steps:
+1) Create SAFE project
+2) Upgrade to react 18.2 (Works fine)
+3) Add a react component ([<ReactComponent>])
 
-## Install pre-requisites
+react-dom.development.js:16227 Uncaught Error: Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:
+1. You might have mismatching versions of React and the renderer (such as React DOM)
+2. You might be breaking the Rules of Hooks
+3. You might have more than one copy of React in the same app
+See https://reactjs.org/link/invalid-hook-call for tips about how to debug and fix this problem.
+    at Object.throwInvalidHookError (react-dom.development.js:16227:1)
+    at Object.useState (react.development.js:1622:1)
+    at Feliz_React__React_useState_Static_1505 (React.fs:652:51)
+    at Counter (Index.fs:91:29)
+    at view (Index.fs:125:29)
+    at eval (Util.js:514:1)
+    at uncurried (Util.js:505:1)
+    at Object.eval [as render] (common.fs:92:34)
+    at Components_LazyView$1.render (common.fs:55:17)
+    at finishClassComponent (react-dom.development.js:19752:1)
+react-dom.development.js:18687 The above error occurred in the <Components_LazyView$1> component:
 
-You'll need to install the following pre-requisites in order to build SAFE applications
+    at Components_LazyView$1 (webpack-internal:///135:55:9)
 
-* [.NET Core SDK](https://www.microsoft.com/net/download) 6.0 or higher
-* [Node 16](https://nodejs.org/en/download/)
-
-## Starting the application
-
-Before you run the project **for the first time only** you must install dotnet "local tools" with this command:
-
-```bash
-dotnet tool restore
-```
-
-To concurrently run the server and the client components in watch mode use the following command:
-
-```bash
-dotnet run
-```
-
-Then open `http://localhost:8080` in your browser.
-
-The build project in root directory contains a couple of different build targets. You can specify them after `--` (target name is case-insensitive).
-
-To run concurrently server and client tests in watch mode (you can run this command in parallel to the previous one in new terminal):
-
-```bash
-dotnet run -- RunTests
-```
-
-Client tests are available under `http://localhost:8081` in your browser and server tests are running in watch mode in console.
-
-Finally, there are `Bundle` and `Azure` targets that you can use to package your app and deploy to Azure, respectively:
-
-```bash
-dotnet run -- Bundle
-dotnet run -- Azure
-```
-
-## SAFE Stack Documentation
-
-If you want to know more about the full Azure Stack and all of it's components (including Azure) visit the official [SAFE documentation](https://safe-stack.github.io/docs/).
-
-You will find more documentation about the used F# components at the following places:
-
-* [Saturn](https://saturnframework.org/)
-* [Fable](https://fable.io/docs/)
-* [Elmish](https://elmish.github.io/elmish/)
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries.
+l
