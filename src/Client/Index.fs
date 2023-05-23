@@ -17,8 +17,42 @@ let todosApi =
     |> Remoting.withRouteBuilder Route.builder
     |> Remoting.buildProxy<ITodosApi>
 
+type OtherObj = {
+    StructObj: StructObj
+    Int: int
+}
+
+let debug () =
+    let x0 = {
+        IntVal1 = 1
+        DoubleVal1 = 1.0
+        IntVal2 = 2
+        DoubleVal2 = 2.5
+    }
+    let x1 = {
+        x0 with
+            IntVal2 = 3
+            DoubleVal2 = 3.5
+    }
+    Browser.Dom.console.log x1
+    let x2 = { StructObj = x1; Int = 1 }
+    Browser.Dom.console.log x2
+    let x3 = [x2]
+    Browser.Dom.console.log x3
+
+    let f (x: OtherObj list) = 
+        match x with
+        | [x] -> { x with StructObj = {x.StructObj with IntVal2 = 4; DoubleVal2 = 4.5} }
+        | _ -> x2
+    let x4 = f x3
+
+    Browser.Dom.console.log x4
+
+
+
 let init () : Model * Cmd<Msg> =
     let model = { Todos = []; Input = "" }
+    debug ()
 
     let cmd = Cmd.OfAsync.perform todosApi.getTodos () GotTodos
 
@@ -86,17 +120,6 @@ let containerBox (model: Model) (dispatch: Msg -> unit) =
         ]
     ]
 
-[<ReactComponent>]
-let Counter() =
-    let (count, setCount) = React.useState(0)
-    Html.div [
-        Html.h1 count
-        Html.button [
-            prop.text "Increment"
-            prop.onClick (fun _ -> setCount(count + 1))
-        ]
-    ]
-
 let view (model: Model) (dispatch: Msg -> unit) =
     Bulma.hero [
         hero.isFullHeight
@@ -122,7 +145,6 @@ let view (model: Model) (dispatch: Msg -> unit) =
                                 text.hasTextCentered
                                 prop.text "SAFE_Test"
                             ]
-                            Counter()
                             containerBox model dispatch
                         ]
                     ]

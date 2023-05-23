@@ -24,7 +24,9 @@ module Storage =
         addTodo (Todo.create "Ship it !!!") |> ignore
 
 let todosApi =
-    { getTodos = fun () -> async { return Storage.todos |> List.ofSeq }
+    {
+      debug = fun x -> async { return () }
+      getTodos = fun () -> async { return Storage.todos |> List.ofSeq }
       addTodo =
         fun todo ->
             async {
